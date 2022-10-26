@@ -1,0 +1,16 @@
+App\Entity\Measurement:
+  properties:
+    Temperature:
+      - Range:
+          min: -60
+          max: 60
+          notInRangeMessage: Temperatura musi znajdować się w przedziale od {{ min }} do {{ max }}.
+          groups: ['new', 'edit']
+    Description:
+      - NotBlank: ~
+      - Length:
+                min: 2
+                max: 255
+                minMessage: 'Opis pomiaru musi mieć przynajmniej {{ limit }} znaki.'
+                maxMessage: 'Opis pomiaru może mieć maksymalnie {{ limit }} znaków.'
+                groups: ['new', 'edit']

@@ -1,0 +1,14 @@
+App\Entity\Location:
+  properties:
+    Lon:
+      - Range:
+          min: -180
+          max: 180
+          notInRangeMessage: Długość geograficzna musi być pomiędzy {{ min }}, a {{ max }}.
+          groups: ['new', 'edit']
+    Lat:
+      - Range:
+          min: -90
+          max: 90
+          notInRangeMessage: Szerokość geograficzna musi być pomiędzy {{ min }}, a {{ max }}.
+          groups: ['new', 'edit']

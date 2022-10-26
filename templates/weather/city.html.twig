@@ -11,7 +11,7 @@
 <h1>{{ location.cityName }}, {{ location.countryCode }}</h1>
     <ul>
     {% for measurement in measurements %}
-        <li>{{ measurement.date|date('d.m.Y h:m:s') }}: {{ measurement.temperature }}&deg;C, {{ measurement.description }}</li>
+        <li>{{ measurement.date|date('d.m.Y H:i:s') }}: {{ measurement.temperature }}&deg;C, {{ measurement.description }}</li>
     {% endfor %}
     </ul>
 </div>
