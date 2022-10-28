@@ -10,17 +10,30 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+
 #[Route('/location/crud')]
 class LocationCrudController extends AbstractController
 {
+    /**
+     * @IsGranted("ROLE_LOCATION_DISPLAY_ALL")
+     **/
     #[Route('/', name: 'app_location_crud_index', methods: ['GET'])]
     public function index(LocationRepository $locationRepository): Response
     {
+        /** @var User $user */
+        $user = $this->getUser();
+
         return $this->render('location_crud/index.html.twig', [
             'locations' => $locationRepository->findAll(),
+            'user' => $user
         ]);
     }
 
+    /**
+     * @IsGranted("ROLE_LOCATION_CREATE_NEW")
+     **/
     #[Route('/new', name: 'app_location_crud_new', methods: ['GET', 'POST'])]
     public function new(Request $request, LocationRepository $locationRepository): Response
     {
@@ -40,6 +53,9 @@ class LocationCrudController extends AbstractController
         ]);
     }
 
+    /**
+     * @IsGranted("ROLE_LOCATION_SHOW")
+     **/
     #[Route('/{id}', name: 'app_location_crud_show', methods: ['GET'])]
     public function show(Location $location): Response
     {
@@ -48,6 +64,9 @@ class LocationCrudController extends AbstractController
         ]);
     }
 
+    /**
+     * @IsGranted("ROLE_LOCATION_EDIT")
+     **/
     #[Route('/{id}/edit', name: 'app_location_crud_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Location $location, LocationRepository $locationRepository): Response
     {
@@ -66,6 +85,9 @@ class LocationCrudController extends AbstractController
         ]);
     }
 
+    /**
+     * @IsGranted("ROLE_LOCATION_DELETE")
+     **/
     #[Route('/{id}', name: 'app_location_crud_delete', methods: ['POST'])]
     public function delete(Request $request, Location $location, LocationRepository $locationRepository): Response
     {

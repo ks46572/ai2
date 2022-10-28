@@ -5,6 +5,9 @@
 {% block body %}
     <h1>Location index</h1>
 
+    <h2>Witaj: {{ user.email }} - {{ user.roles|join(', ') }}</h2>
+    <a href="{{ path('logout') }}">WYLOGUJ</a>
+
     <table class="table">
         <thead>
             <tr>
@@ -25,8 +28,11 @@
                 <td>{{ location.Lon }}</td>
                 <td>{{ location.Lat }}</td>
                 <td>
+
                     <a href="{{ path('app_location_crud_show', {'id': location.id}) }}">show</a>
+                    {% if is_granted('ROLE_ADMIN') %}
                     <a href="{{ path('app_location_crud_edit', {'id': location.id}) }}">edit</a>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}
@@ -37,6 +43,9 @@
         </tbody>
     </table>
 
+    {% if is_granted('ROLE_ADMIN') %}
     <a href="{{ path('app_location_crud_new') }}">Create new</a>
+    {% endif %}
+    
     <a href="{{ path('app_measurement_crud_index') }}">Go to measurements</a>
 {% endblock %}
