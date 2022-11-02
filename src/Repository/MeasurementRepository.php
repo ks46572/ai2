@@ -43,6 +43,18 @@ class MeasurementRepository extends ServiceEntityRepository
         return $result;
     }
 
+    public function findByLocationId($id)
+    {
+        $qb = $this->createQueryBuilder('m');
+        $qb->where('m.Location = :location')
+        ->setParameter('location', $id)
+        ->andWhere('m.Date > :now')
+        ->setParameter('now', date('Y-m-d'));
+        $query = $qb->getQuery();
+        $result = $query->getResult();
+        return $result;
+    }
+
     public function remove(Measurement $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
