@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Serializer\Annotation\Ignore;
+
 use App\Repository\MeasurementRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -42,6 +44,10 @@ class Measurement
         $this->Temperature = $Temperature;
 
         return $this;
+    }
+
+    public function getFahrenheit(): ?string {
+        return strval(intval($this->Temperature)*1.8 + 32);
     }
 
     public function getDescription(): ?string

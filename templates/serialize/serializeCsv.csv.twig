@@ -1,0 +1,4 @@
+{{ 'location.id,location.city,location.country,location.latitude,location.longitude,measurement.id,measurement.celsius,measurement.fahrenheit,measurement.description,measurement.date' }}
+{% for m in mea %}
+    {{ [loc.id, loc.cityName, loc.countryCode, loc.lat, loc.lon, m.id, m.temperature, m.fahrenheit, m.description, m.date|date('Y-m-d H:i:s')]|join(',') }}
+{% endfor %}

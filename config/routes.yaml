@@ -3,6 +3,53 @@
 #    controller: App\Controller\DefaultController::index
 
 # config/routes.yaml
+
+
+api_get_measures_by_country_and_city_json_payload:
+  path: /api/json/weather/search
+  controller: App\Controller\WeatherApiController::getMeasuresByCityAndCountryPOSTPayloadAction
+  methods:    POST
+
+api_get_measures_by_country_and_city_json:
+  path: /api/json/weather/{countryCode}/{cityName}
+  controller: App\Controller\WeatherApiController::getMeasuresByCityAndCountryJSONAction
+  requirements:
+    countryCode: '[A-Z]{2}'
+    cityName: '[a-zA-Z- ]+'
+  defaults:
+    countryCode: 'PL'
+    cityName: 'Goleniów'
+
+api_get_measures_by_country_and_city_csv:
+  path: /api/csv/weather/{countryCode}/{cityName}
+  controller: App\Controller\WeatherApiController::getMeasuresByCityAndCountryCSVAction
+  requirements:
+    countryCode: '[A-Z]{2}'
+    cityName: '[a-zA-Z- ]+'
+  defaults:
+    countryCode: 'PL'
+    cityName: 'Goleniów'
+
+api_get_measures_by_country_and_city_csv_twig:
+  path: /api/twig/csv/weather/{countryCode}/{cityName}
+  controller: App\Controller\WeatherApiController::getMeasuresByCityAndCountryCSVTwigAction
+  requirements:
+    countryCode: '[A-Z]{2}'
+    cityName: '[a-zA-Z- ]+'
+  defaults:
+    countryCode: 'PL'
+    cityName: 'Goleniów'
+
+api_get_measures_by_country_and_city_json_twig:
+  path: /api/twig/json/weather/{countryCode}/{cityName}
+  controller: App\Controller\WeatherApiController::getMeasuresByCityAndCountryJSONTwigAction
+  requirements:
+    countryCode: '[A-Z]{2}'
+    cityName: '[a-zA-Z- ]+'
+  defaults:
+    countryCode: 'PL'
+    cityName: 'Goleniów'
+
 weather_in_city:
   path: /weather/{countryCode}/{cityName}
   controller: App\Controller\WeatherController::cityAction
